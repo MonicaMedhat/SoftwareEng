@@ -72,17 +72,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     
     if( $db_obj->executesql($sql) == true){
         
-        if($id==1)
-        {
-             header("location:http://localhost/lawfirm/index.html");
+             header("location:http://localhost/lawfirm/userpage.php");
 
-        }
-        
-        if($id==2)
-        {
-             header("location:http://localhost/lawfirm/lawyerpage.php");
-
-        }
         
          }
     
