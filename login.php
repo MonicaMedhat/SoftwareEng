@@ -1,4 +1,4 @@
-<html>
+html>
 
 <head>
     <script src="jquery-3.2.1.min.js"></script>
@@ -54,15 +54,26 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
    
     $u =$_POST["Email"];
     $p = $_POST["password"];
-    $sql="SELECT Email, Password, UserType_id from user where Email= '$u'";
+    
+    $sql="SELECT Value,User_ID from email where Value= '$u'";
 	$result=$db_obj->executesql($sql);
 	$row = mysqli_fetch_array($result);
-    $id = $row["UserType_id"];
-    if(($u==$row["Email"])&&($p==$row["Password"]))
+    $uid = $row["User_ID"];
+    
+    $sqll="SELECT Value from passwords where User_ID= '$uid'";
+    $resultt=$db_obj->executesql($sqll);
+	$roww = mysqli_fetch_array($resultt);
+    
+    $sqlll="SELECT UserType_id from user where ID= '$uid'";
+    $resulttt=$db_obj->executesql($sqlll);
+	$roww = mysqli_fetch_array($resulttt);
+    $id = $rowww["UserType_id"];
+    
+    if(($u==$row["Value"])&&($p==$roww["Value"]))
     {
-        $_SESSION["Email"]=$row["Email"];
-        $_SESSION["password"]=$row["Password"];
-         $_SESSION["Userid"] = $row["UserType_id"];
+        $_SESSION["Email"]=$row["Value"];
+        $_SESSION["password"]=$roww["Value"];
+         $_SESSION["Userid"] = $rowww["UserType_id"];
         
     }
     
@@ -85,5 +96,4 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
 ?>
-    
-
+  
