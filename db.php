@@ -5,18 +5,25 @@
 		private $password;
 		private $db;
 		private $con;
-
+        private static $_instance = null;
+        
 		function __construct(){
 			$this->servername = "localhost"; //specifying that you will use the localhost
 			$this->username = "root"; // username 
 			$this->password = ""; //password
 			$this->db = "sw"; //name of database if it is already created.
-			//$this->con = $this->Connect(); // creating a connection
+			
 		}
 
-		function connect(){
-			$this->con = mysqli_connect($this->servername, $this->username, $this->password, $this->db); // connecting to the localhost
 
+		function connect(){
+            if ($this->con == null) { //singleton 
+			$this->con = mysqli_connect($this->servername, $this->username, $this->password, $this->db); // connecting to the localhost
+            }
+            else { // There is already a PDO, so just send it back.
+             return $this->con;
+              }
+            
 			if($this->con->connect_error){
 				die("Failed to connect: " .$this->con->connect_error);
 			}
