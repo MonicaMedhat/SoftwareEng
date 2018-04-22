@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2018 at 04:05 PM
+-- Generation Time: Apr 22, 2018 at 08:19 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -110,7 +110,9 @@ CREATE TABLE `casedetails` (
 --
 
 INSERT INTO `casedetails` (`ID`, `Document_ID`, `Pay_O_Value_ID`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 1, 1),
+(3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -273,15 +275,16 @@ INSERT INTO `degree_enrollment` (`ID`, `Name`) VALUES
 CREATE TABLE `documents` (
   `ID` int(11) NOT NULL,
   `DocumentType_ID` int(11) NOT NULL,
-  `احراز` varchar(255) NOT NULL
+  `a7raz` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `documents`
 --
 
-INSERT INTO `documents` (`ID`, `DocumentType_ID`, `احراز`) VALUES
-(1, 2, 'فديو مسجل');
+INSERT INTO `documents` (`ID`, `DocumentType_ID`, `a7raz`) VALUES
+(1, 2, 'فديو مسجل'),
+(2, 2, 'سكينة');
 
 -- --------------------------------------------------------
 
@@ -1023,7 +1026,7 @@ ALTER TABLE `approve`
 -- AUTO_INCREMENT for table `casedetails`
 --
 ALTER TABLE `casedetails`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `cases`
@@ -1071,7 +1074,7 @@ ALTER TABLE `degree_enrollment`
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `documenttype_id`
@@ -1173,7 +1176,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `salarydetails`
