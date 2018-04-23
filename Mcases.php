@@ -20,6 +20,7 @@ class Cases{
     public $Status_ID;
     public $Dayra_ID;
     public $CaseDetails_ID;
+    public $obj;
     
     
     public function show()
@@ -61,14 +62,13 @@ INNER JOIN casedetails T12
         
     }
     
-    public function insert(){
+    public function insert($obj){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
        
-        $sql = "INSERT INTO `cases` (`CaseNumber`, `Tare5_raf3_eld3wa`, `Date_Of_Case_ID`, `Lawyer_ID`, `Client_ID`,ClientType_ID, `5esm_ID`, `CaseType_ID`, `Place_Of_Case_ID`, `CourtName_ID`, `Status_ID`, `Dayra_ID`,CaseDetails_ID) VALUES ('".$this->CaseNumber."', '".$this->Tare5_raf3_eld3wa."','".$this->Date_Of_Case_ID."','".$this->Lawyer_ID."','".$this->Client_ID."','".$this->ClientType_ID."','".$this->hesm_ID."','".$this->CaseType_ID."','".$this->Place_Of_Case_ID."','".$this->CourtName_ID."','".$this->Status_ID."','".$this->Dayra_ID."','".$this->CaseDetails_ID."')";
-        $db_obj->connect();
+        $sql = "INSERT INTO `cases` (`CaseNumber`, `Tare5_raf3_eld3wa`, `Date_Of_Case_ID`, `Lawyer_ID`, `Client_ID`,ClientType_ID, `5esm_ID`, `CaseType_ID`, `Place_Of_Case_ID`, `CourtName_ID`, `Status_ID`, `Dayra_ID`,CaseDetails_ID) VALUES ('".$obj->CaseNumber."', '".$obj->Tare5_raf3_eld3wa."','".$obj->Date_Of_Case_ID."','".$obj->Lawyer_ID."','".$obj->Client_ID."','".$obj->ClientType_ID."','".$obj->hesm_ID."','".$obj->CaseType_ID."','".$obj->Place_Of_Case_ID."','".$obj->CourtName_ID."','".$obj->Status_ID."','".$obj->Dayra_ID."','".$obj->CaseDetails_ID."')";
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }

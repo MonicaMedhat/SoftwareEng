@@ -1,16 +1,23 @@
 <?php
+require_once("db.php");
+ $db_obj = new dbconnect;
+		$con = $db_obj->connect();
+        $con->set_charset("utf8");
+        header('Content-Type: text/html; charset=utf-8');
+
 class CaseDetails{
     public $ID;
- public $doc_ID;
-public $POV_ID;
+    public $doc_ID;
+    public $POV_ID;
+    public $obj;
     
-public function insert ()
+public function insert ($obj)
 {
     $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
-    $sql="INSERT INTO `casedetails`( `Document_ID`, `Pay_O_Value_ID`) VALUES ('".$this->doc_ID."','".$this->POV_ID."') ";
+    $sql="INSERT INTO `casedetails`( `Document_ID`, `Pay_O_Value_ID`) VALUES ('".$obj->doc_ID."','".$obj->POV_ID."') ";
     $db_obj->connect();
         $db_obj->executesql($sql);
         $db_obj->disconnect();

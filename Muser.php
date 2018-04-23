@@ -1,21 +1,26 @@
 <?php
+require_once("db.php");
+ $db_obj = new dbconnect;
+		$con = $db_obj->connect();
+        $con->set_charset("utf8");
+        header('Content-Type: text/html; charset=utf-8');
 
 class User
 {
     public $ID;
-	public $FullName ;
+	public $FullName;
 	public $mobile;
-	public $Address_ID ;
-	
+	public $Address_ID;
 	public $UserType_id;
+    public $obj;
     
-     public function insert(){
+     public function insert($obj){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
        
-         $sql = "INSERT INTO user (FullName , mobile ,Address_ID, UserType_id) VALUES ('".$this->FullName."' , '".$this->mobile."' ,'".$this->Address_ID."'   , '".$this->UserType_id."' )";
+         $sql = "INSERT INTO user (FullName , mobile ,Address_ID, UserType_id) VALUES ('".$obj->FullName."' , '".$obj->mobile."' ,'".$obj->Address_ID."'   , '".$obj->UserType_id."' )";
          
         $db_obj->connect();
         $db_obj->executesql($sql);

@@ -1,4 +1,4 @@
-<?php require ("addCase.php"); ?>
+
 <!DOCTYPE html>
 <html>
 <title>Home</title>
@@ -57,7 +57,7 @@
   <div class="w3-row-padding">
     <div class="w3-third w3-container w3-margin-bottom">
 
-      <div  onclick="location.href = 'addCase.php';" class="w3-container w3-white">
+      <div  onclick="location.href = 'ViewCase.php';" class="w3-container w3-white">
         <h2><b class="fa fa-paperclip"> اضافة قضية جديدة</b></h2>
 
       </div>
@@ -93,7 +93,7 @@
     </div>
     <div class="w3-third w3-container">
 
-      <div class="w3-container w3-white">
+      <div class="w3-container w3-white" onclick="location.href = 'calendar.html';">
          <h2><b  class="fa fa-calendar-o"> مفكرة</b></h2>
 
       </div>
@@ -215,6 +215,7 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+
 </script>
 
 </body>

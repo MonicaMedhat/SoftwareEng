@@ -4,18 +4,20 @@ require_once("db.php");
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
+
 class Documents{
     public $ID;
- public $docType_ID;
-public $a7raz;
+    public $docType_ID;
+    public $a7raz;
+    public $obj;
     
-public function insert ()
+public function insert ($obj)
 {
     $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
-    $sql="INSERT INTO `documents`(`DocumentType_ID`, `a7raz`) VALUES ('".$this->docType_ID."','".$this->a7raz."') ";
+    $sql="INSERT INTO `documents`(`DocumentType_ID`, `a7raz`) VALUES ('".$obj->docType_ID."','".$obj->a7raz."') ";
     $db_obj->connect();
         $db_obj->executesql($sql);
         $db_obj->disconnect();
