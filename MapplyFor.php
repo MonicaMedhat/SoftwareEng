@@ -1,24 +1,21 @@
 <?php
 require_once("db.php");
- $db_obj = new dbconnect;
-		$con = $db_obj->connect();
-        $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
 
-class Email
+
+class Apply_For
 {
     public $ID;
-	public $User_ID;
-	public $Value;
+	public $Name;
 	
     
      public function insert(){
-        $db_obj = new dbconnect;
+      $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-         $sql = "INSERT INTO  `email`( `User_ID`, `Value`) VALUES ('".$this->User_ID."' , '".$this->Value."')";
+   
+         $sql = "INSERT INTO  `apply_for`( `Name`) VALUES ('".$this->Name."' )";
          
-        $db_obj->connect();
+        
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
@@ -28,10 +25,10 @@ class Email
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
+       
+        $sql="DELETE FROM apply_for WHERE ID ='".$ID."'";
          
-        $sql="DELETE FROM email WHERE ID ='".$ID."'";
-         
-        $db_obj->connect();
+        
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
@@ -40,21 +37,36 @@ class Email
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        
-         $sql = "UPDATE email SET `User_ID`='".$this->User_ID."',`Value`='".$this->Value."' WHERE ID ='".$ID."'";
+ 
          
-        $db_obj->connect();
+       
+         $sql = "UPDATE apply_for SET `Name`='".$this->Name."' WHERE ID ='".$ID."'";
+         
+        
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
-    public static function View($e){
+    static function View()
+    {
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        $sql = "SELECT User_ID FROM email where Value= '".$e."'  ";
-        $result = $db_obj->executesql($sql);
-        return $result;
+
        
+        $sql="SELECT ID,Name FROM apply_for";
+         
+        $TypeDataSet = $db_obj->executesql($sql);
+		$i=0;
+		$Result;
+		while ($row =  mysqli_fetch_array($TypeDataSet))
+		{
+			$MyObj= new Apply_For;
+            $MyObj->ID = $row["ID"];
+            $MyObj->Name = $row["Name"];
+			$Result[$i]=$MyObj;
+			$i++;
+		}
+		return $Result;
     }
     
     

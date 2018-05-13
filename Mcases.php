@@ -1,12 +1,8 @@
 <?php
 require_once("db.php");
- $db_obj = new dbconnect;
-		$con = $db_obj->connect();
-        $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
-class Cases{
+       
+class Cases {
 
-    
     public $CaseNumber;
     public $Tare5_raf3_eld3wa;
     public $Date_Of_Case_ID;
@@ -20,15 +16,14 @@ class Cases{
     public $Status_ID;
     public $Dayra_ID;
     public $CaseDetails_ID;
-    public $obj;
     
     
-    public function show()
+    static function show()
     {
          $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+       
         $sql="
 SELECT Status,CaseNumber,T1.FullName As 5esm,T2.FullName AS Lawyer ,T3.FullName AS Client,T11.Type AS ClientType, T4.Date As Date , T5.Time As Time ,T6.Dayra AS Dayra ,T7.Name As Name,T8.Place As Place,T9.Date As Date2,T10.Name AS Type T12.Details AS CaseDetails From cases c1
 INNER JOIN case_status
@@ -62,13 +57,13 @@ INNER JOIN casedetails T12
         
     }
     
-    public function insert($obj){
+    public function insert(){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
        
-        $sql = "INSERT INTO `cases` (`CaseNumber`, `Tare5_raf3_eld3wa`, `Date_Of_Case_ID`, `Lawyer_ID`, `Client_ID`,ClientType_ID, `5esm_ID`, `CaseType_ID`, `Place_Of_Case_ID`, `CourtName_ID`, `Status_ID`, `Dayra_ID`,CaseDetails_ID) VALUES ('".$obj->CaseNumber."', '".$obj->Tare5_raf3_eld3wa."','".$obj->Date_Of_Case_ID."','".$obj->Lawyer_ID."','".$obj->Client_ID."','".$obj->ClientType_ID."','".$obj->hesm_ID."','".$obj->CaseType_ID."','".$obj->Place_Of_Case_ID."','".$obj->CourtName_ID."','".$obj->Status_ID."','".$obj->Dayra_ID."','".$obj->CaseDetails_ID."')";
+        $sql = "INSERT INTO `cases` (`CaseNumber`, `Tare5_raf3_eld3wa`, `Date_Of_Case_ID`, `Lawyer_ID`, `Client_ID`,ClientType_ID, `5esm_ID`, `CaseType_ID`, `Place_Of_Case_ID`, `CourtName_ID`, `Status_ID`, `Dayra_ID`,CaseDetails_ID) VALUES ('".$this->CaseNumber."', '".$this->Tare5_raf3_eld3wa."','".$this->Date_Of_Case_ID."','".$this->Lawyer_ID."','".$this->Client_ID."','".$this->ClientType_ID."','".$this->hesm_ID."','".$this->CaseType_ID."','".$this->Place_Of_Case_ID."','".$this->CourtName_ID."','".$this->Status_ID."','".$this->Dayra_ID."','".$this->CaseDetails_ID."')";
+        $db_obj->connect();
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
@@ -77,7 +72,7 @@ INNER JOIN casedetails T12
          $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+        
         $sql="DELETE FROM cases WHERE CaseNumber='".$CaseNumber."'";
         $db_obj->connect();
         $db_obj->executesql($sql);
@@ -88,7 +83,7 @@ INNER JOIN casedetails T12
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+        
         $sql="UPDATE `cases` SET `CaseNumber`='".$this->CaseNumber."',`Tare5_raf3_eld3wa`='".$this->Tare5_raf3_eld3wa."',`Date_Of_Case_ID`='".$this->Date_Of_Case_ID."',`Lawyer_ID`='".$this->Lawyer_ID."',`Client_ID`='".$this->Client_ID."',`ClientType_ID`='".$this->ClientType_ID."',`5esm_ID`='".$this->hesm_ID."',`CaseType_ID`='".$this->CaseType_ID."',`Place_Of_Case_ID`='".$this->Place_Of_Case_ID."',`CourtName_ID`='".$this->CourtName_ID."',`Status_ID`='".$this->Status_ID."',`Dayra_ID`='".$this->Dayra_ID."',`CaseDetails_ID`='".$this->CaseDetails_ID."'WHERE CaseNumber='".$CaseNumber."'";
         $db_obj->connect();
         $db_obj->executesql($sql);
@@ -98,16 +93,5 @@ INNER JOIN casedetails T12
     
 
 }
-//-------------------------------------------caseDetails--------------------------
-
-
-//---------------------User---------------------------------------------
-
-//----------------------------------//applications//--------------------------------------------------------------------
-
-//--------------------------------------------------Login-------------------------------------------------------------
-
-
-//-------------------------------------------
 
 ?>

@@ -1,22 +1,42 @@
 <?php
+require_once("db.php");
+
 class Login
 {
-    public $FullName ;
-    public $password;   
+    public $email;
+    public $password;
+    public $User_ID;
     
-      public function login(){
-    $db_obj = new dbconnect;
+static function checklogin($e,$p){
+        $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
           
-           $sql="SELECT FullName,passwords.Value FROM USER u1 INNER JOIN passwords ON passwords.User_ID =u1.ID";
-          
-          $db_obj->connect();
-        $db_obj->executesql($sql);
-        $db_obj->disconnect();
-      }
+        $sql="SELECT * FROM email where User_ID ='".$e."'";
+        $sqll="SELECT * FROM passwords  where User_ID ='".$p."'";
+        
+        $E = $db_obj->executesql($sql);
+        $p = $db_obj->executesql($sqll);
+        $row =  mysqli_fetch_array($E);
+        $roww =  mysqli_fetch_array($p);
+		        
+		if($row["User_ID"] == $roww["User_ID"])
+		{
+            
+            $Result = $row["User_ID"];
+			
+		}
+		return $Result;
+       
+    }
+    
+static function logout()
+{
+    session_start();
+    session_destroy();
+    header("location:http://localhost/lawfirm/Vlogin.php");
 }
-
+    
+}
 
 ?>

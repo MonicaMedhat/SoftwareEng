@@ -20,6 +20,7 @@ class Approve
        
          $sql = "INSERT INTO  `approve`( `App_ID`, `TransactionLog_ID`) VALUES ('".$this->App_ID."' , '".$this->TransactionLog_ID."')";
          
+         echo $sql;
         $db_obj->connect();
         $db_obj->executesql($sql);
         $db_obj->disconnect();

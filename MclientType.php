@@ -1,26 +1,25 @@
 <?php
 require_once("db.php");
- $db_obj = new dbconnect;
-		$con = $db_obj->connect();
-        $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
 
-class Passwords
+
+class ClientType
 {
     public $ID;
-	public $User_ID;
-	public $Value;
+	public $Type;
 	
     
      public function insert(){
-        $db_obj = new dbconnect;
+      $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+        
+header('Content-Type: text/html; charset=utf-8');
+        
+		
        
-         $sql = "INSERT INTO  `passwords`( `User_ID`, `Value`) VALUES ('".$this->User_ID."' , '".$this->Value."')";
+         $sql = "INSERT INTO  `clienttype`( `Type`) VALUES ('".$this->Type."' )";
          
-        $db_obj->connect();
+        
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
@@ -32,9 +31,9 @@ class Passwords
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
        
-        $sql="DELETE FROM passwords WHERE ID ='".$ID."'";
+        $sql="DELETE FROM clienttype WHERE ID ='".$ID."'";
          
-        $db_obj->connect();
+        
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
@@ -46,22 +45,36 @@ class Passwords
         header('Content-Type: text/html; charset=utf-8');
          
        
-         $sql = "UPDATE passwords SET `User_ID`='".$this->User_ID."',`Value`='".$this->Value."' WHERE ID ='".$ID."'";
+         $sql = "UPDATE clienttype SET `Type`='".$this->Type."' WHERE ID ='".$ID."'";
          
-        $db_obj->connect();
+        
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
-    
-     public static function View($password){
+    static function View()
+    {
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        $sql = "SELECT User_ID FROM passwords where Value = '".$password."'";
-        $result = $db_obj->executesql($sql);
-        return $result;
        
+        $sql="SELECT ID,Type FROM clienttype";
+         
+         $TypeDataSet = $db_obj->executesql($sql);
+		
+		$i=0;
+		$Result;
+		while ($row =  mysqli_fetch_array($TypeDataSet))
+		{
+			$MyObj= new ClientType;
+            $MyObj->ID = $row["ID"];
+            $MyObj->Type = $row["Type"];
+			$Result[$i]=$MyObj;
+			$i++;
+		}
+		return $Result;
     }
+
+    
     
 }
 ?>
