@@ -2,18 +2,23 @@
 require_once("db.php");
 
 
-class months
+class FatDet
 {
     public $ID;
-	public $Name;
+	public $ExpenseType_ID;
+	public $Paid;
 	
     
      public function insert(){
       $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
+        
+header('Content-Type: text/html; charset=utf-8');
+        
+		
        
-         $sql = "INSERT INTO  `monthes`( `Name`) VALUES ('".$this->Name."' )";
+         $sql = "INSERT INTO `fatora_details`(`ExpenseType_ID`, `Paid`) VALUES('".$this->ExpenseType_ID."','".$this->Paid."' )";
          
         
         $db_obj->executesql($sql);
@@ -25,8 +30,9 @@ class months
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-              
-        $sql="DELETE FROM monthes WHERE ID ='".$ID."'";
+        header('Content-Type: text/html; charset=utf-8');
+       
+        $sql="DELETE FROM fatora_details WHERE ID ='".$ID."'";
          
         
         $db_obj->executesql($sql);
@@ -36,47 +42,39 @@ class months
      public function update($ID){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
-        $con->set_charset("utf8");     
+        $con->set_charset("utf8");
+        header('Content-Type: text/html; charset=utf-8');
+         
        
-         $sql = "UPDATE casetype SET `Name`='".$this->Name."' WHERE ID ='".$ID."'";
+         $sql = "UPDATE fatora_details SET `ExpenseType_ID`='".$this->ExpenseType_ID."',`Paid`='".$this->Paid."' WHERE ID ='".$ID."'";
          
         
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
-  static function View()
+     public function View()
     {
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        
+        header('Content-Type: text/html; charset=utf-8');
        
-        $sql="SELECT ID,Name FROM monthes";
+        $sql="SELECT ID,`ExpenseType_ID`,`Paid` FROM fatora_details";
          
-        $TypeDataSet = $db_obj->executesql($sql);
-		$i=0;
-		$Result;
-		while ($row =  mysqli_fetch_array($TypeDataSet))
-		{
-			$MyObj= new months;
-            $MyObj->ID = $row["ID"];
-            $MyObj->Name = $row["Name"];
-			$Result[$i]=$MyObj;
-			$i++;
-		}
-		return $Result;
+        
+        $db_obj->executesql($sql);
+        $db_obj->disconnect();
     }
     
-    public static function ViewM($mid){
+     public static function ViewM($mid){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        $sql = "select ID  FROM monthes where Name ='".$mid."'";
+        $sql = "select ID  FROM fatora_details where Paid ='".$mid."'";
         $m = $db_obj->executesql($sql);
         return $m;
-        
-    }
-
     
+    
+}
 }
 ?>

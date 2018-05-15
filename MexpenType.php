@@ -2,18 +2,22 @@
 require_once("db.php");
 
 
-class months
+class ExpenseTypes
 {
     public $ID;
-	public $Name;
+	public $Type;
 	
     
      public function insert(){
       $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
+        
+header('Content-Type: text/html; charset=utf-8');
+        
+		
        
-         $sql = "INSERT INTO  `monthes`( `Name`) VALUES ('".$this->Name."' )";
+         $sql = "INSERT INTO  `expensetypes`( `Type`) VALUES ('".$this->Type."' )";
          
         
         $db_obj->executesql($sql);
@@ -25,8 +29,9 @@ class months
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-              
-        $sql="DELETE FROM monthes WHERE ID ='".$ID."'";
+        header('Content-Type: text/html; charset=utf-8');
+       
+        $sql="DELETE FROM expensetypes WHERE ID ='".$ID."'";
          
         
         $db_obj->executesql($sql);
@@ -36,47 +41,41 @@ class months
      public function update($ID){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
-        $con->set_charset("utf8");     
+        $con->set_charset("utf8");
+        header('Content-Type: text/html; charset=utf-8');
+         
        
-         $sql = "UPDATE casetype SET `Name`='".$this->Name."' WHERE ID ='".$ID."'";
+         $sql = "UPDATE expensetypes SET `Type`='".$this->Type."' WHERE ID ='".$ID."'";
          
         
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
-  static function View()
+    
+     static function View()
     {
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
         
        
-        $sql="SELECT ID,Name FROM monthes";
+        $sql="SELECT ID,Type FROM expensetypes";
          
-        $TypeDataSet = $db_obj->executesql($sql);
+         $TypeDataSet = $db_obj->executesql($sql);
+		
 		$i=0;
 		$Result;
 		while ($row =  mysqli_fetch_array($TypeDataSet))
 		{
-			$MyObj= new months;
+			$MyObj= new PMethod;
             $MyObj->ID = $row["ID"];
-            $MyObj->Name = $row["Name"];
+            $MyObj->Type = $row["Type"];
 			$Result[$i]=$MyObj;
 			$i++;
 		}
 		return $Result;
     }
     
-    public static function ViewM($mid){
-        $db_obj = new dbconnect;
-		$con = $db_obj->connect();
-        $con->set_charset("utf8");
-        $sql = "select ID  FROM monthes where Name ='".$mid."'";
-        $m = $db_obj->executesql($sql);
-        return $m;
-        
-    }
-
     
 }
 ?>

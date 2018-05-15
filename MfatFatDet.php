@@ -2,10 +2,11 @@
 require_once("db.php");
 
 
-class PMethod
+class Fat_FatDet
 {
     public $ID;
-	public $Name;
+	public $FatoraDet_ID;
+	public $Fatora_ID;
 	
     
      public function insert(){
@@ -17,7 +18,7 @@ header('Content-Type: text/html; charset=utf-8');
         
 		
        
-         $sql = "INSERT INTO  `payment`( `Name`) VALUES ('".$this->Name."' )";
+         $sql = "INSERT INTO `fatora_fatdetails`(`FatoraDet_ID`, `Fatora_ID`) VALUES('".$this->FatoraDet_ID."','".$this->Fatora_ID."' )";
          
         
         $db_obj->executesql($sql);
@@ -31,7 +32,7 @@ header('Content-Type: text/html; charset=utf-8');
         $con->set_charset("utf8");
         header('Content-Type: text/html; charset=utf-8');
        
-        $sql="DELETE FROM payment WHERE ID ='".$ID."'";
+        $sql="DELETE FROM fatora_fatdetails WHERE ID ='".$ID."'";
          
         
         $db_obj->executesql($sql);
@@ -45,43 +46,24 @@ header('Content-Type: text/html; charset=utf-8');
         header('Content-Type: text/html; charset=utf-8');
          
        
-         $sql = "UPDATE payment SET `Name`='".$this->Name."' WHERE ID ='".$ID."'";
+         $sql = "UPDATE fatora_fatdetails SET `FatoraDet_ID`='".$this->FatoraDet_ID."',`Fatora_ID`='".$this->Fatora_ID."' WHERE ID ='".$ID."'";
          
         
         $db_obj->executesql($sql);
         $db_obj->disconnect();
     }
-      static function View()
+     public function View()
     {
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        
+        header('Content-Type: text/html; charset=utf-8');
        
-        $sql="SELECT ID,Name FROM payment";
+        $sql="SELECT ID,`FatoraDet_ID`,`Fatora_ID` FROM fatora_fatdetails";
          
-         $TypeDataSet = $db_obj->executesql($sql);
-		
-		$i=0;
-		$Result;
-		while ($row =  mysqli_fetch_array($TypeDataSet))
-		{
-			$MyObj= new PMethod;
-            $MyObj->ID = $row["ID"];
-            $MyObj->Name = $row["Name"];
-			$Result[$i]=$MyObj;
-			$i++;
-		}
-		return $Result;
-    }
-    public static function ViewM($mid){
-        $db_obj = new dbconnect;
-		$con = $db_obj->connect();
-        $con->set_charset("utf8");
-        $sql = "select ID  FROM payment where Name ='".$mid."'";
-        $m = $db_obj->executesql($sql);
-        return $m;
         
+        $db_obj->executesql($sql);
+        $db_obj->disconnect();
     }
     
     
