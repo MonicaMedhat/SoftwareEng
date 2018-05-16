@@ -59,7 +59,7 @@
 <input type="text" id="data_6" name="Demand_salary" style="width : 450px;" class="form-control">
 </div>
 <div style="padding-bottom: 18px;">متى يمكن البدء فى العمل <br>
-<input type="text" id="data_7" name="Starting_in" style="width : 450px;" class="form-control">
+<input type="month" id="data_7" name="Starting_in" style="width : 450px;" class="form-control">
 </div>
 <div style="padding-bottom: 18px;">جهه العمل السابقه<br>
 <input type="text" id="data_8" name="Came_From" style="width : 450px;" class="form-control">

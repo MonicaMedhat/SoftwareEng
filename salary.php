@@ -10,7 +10,7 @@ $totalsalary="";
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "software";
+$dbname = "swproj";
 
 // Create connection
 $con = new mysqli($servername, $username, $password, $dbname);
@@ -18,7 +18,7 @@ $con = new mysqli($servername, $username, $password, $dbname);
 if (isset($_POST['save'])){
 	$salaryDetails_ID = $_POST['salaryDetails_ID'];
 	$totalsalary = $_POST['totalsalary'];
-	$query = "insert into salary (   salaryDetails_ID , totalsalary  ) VALUES (  '$salaryDetails_ID' , '$totalsalary )";
+	$query = "insert into salary (   salaryDetails_ID , totalsalary  ) VALUES ('$salaryDetails_ID' , '$totalsalary' )";
 	mysqli_query($con , $query);
 }
 //retirve data

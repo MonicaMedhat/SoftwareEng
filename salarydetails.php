@@ -9,7 +9,7 @@ $totalsalary="";
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "software";
+$dbname = "swproj";
 
 // Create connection
 $con = new mysqli($servername, $username, $password, $dbname);
