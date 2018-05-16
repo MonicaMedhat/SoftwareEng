@@ -93,7 +93,6 @@ class application
 	   ON T4.ID=a1.Apply_for_ID
     INNER JOIN monthes T5
 	   ON T5.ID=a1.Month_ID
-       
        ";
          
         

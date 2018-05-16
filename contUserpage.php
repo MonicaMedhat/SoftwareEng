@@ -14,9 +14,7 @@
                                                    
                 for($i=0;$i<count($result);$i++)
                 {
-                   $up[$i] = $result[$i]->Pages_ID;
-                    echo $result[$i]->Pages_ID; 
-                   
+                 $up[$i] = $result[$i]->Pages_ID;                   
                  $obj = page::View($up[$i]);  
                     
                for($j=0;$j<count($obj);$j++)
@@ -25,7 +23,7 @@
             <?php
                 } 
                     
-                }
+             }
                    
-                    } 
+            } 
 ?>

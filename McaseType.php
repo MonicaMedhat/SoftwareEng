@@ -44,7 +44,7 @@ public function insert(){
         $db_obj->disconnect();
     }
   static function View()
-    {
+  {
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
@@ -66,20 +66,6 @@ public function insert(){
 		}
 		return $Result;
     }
-//     public function ViewID($ID)
-//    {
-//        $db_obj = new dbconnect;
-//		$con = $db_obj->connect();
-//        $con->set_charset("utf8");
-//        header('Content-Type: text/html; charset=utf-8');
-//       
-//        $sql="SELECT `Name` FROM `casetype` WHERE ID ='".$ID."'";
-//         
-//        
-//        $db_obj->executesql($sql);
-//        $db_obj->disconnect();
-//    }
-    
     
 }
 ?>

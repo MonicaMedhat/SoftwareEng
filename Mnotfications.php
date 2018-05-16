@@ -3,7 +3,6 @@ require_once("db.php");
  $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
 
 class Notfications
 {
@@ -20,8 +19,7 @@ class Notfications
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
-       
+
          $sql = "INSERT INTO  `notfications`( `User_ID`, `Value`) VALUES ('".$this->User_ID."' , '".$this->Value."')";
          
         
@@ -34,7 +32,7 @@ class Notfications
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+        
        
         $sql="DELETE FROM notfications WHERE ID ='".$ID."'";
          
@@ -47,8 +45,6 @@ class Notfications
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
-         
        
          $sql = "UPDATE notfications SET `User_ID`='".$this->User_ID."',`Value`='".$this->Value."' WHERE ID ='".$ID."'";
          

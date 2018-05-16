@@ -4,7 +4,7 @@ require_once("db.php");
  $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+       
 
 class UserType
 {
@@ -42,12 +42,32 @@ class UserType
 		}
 	}
     
+    public function insert(){
+        $db_obj = new dbconnect;
+		$con = $db_obj->connect();
+        $con->set_charset("utf8");
+       
+         $sql = "INSERT INTO usertype (Type) VALUES ('".$this->UserTypeName."')";
+         
+        $db_obj->connect();
+        $db_obj->executesql($sql);
+        $db_obj->disconnect();
+    }
+    
     static function update($id,$nid){
         $db_obj = new dbconnect;
             $con = $db_obj->connect();
             $con->set_charset("utf8");
                 
 			$sql="update user set UserType_id= $id WHERE ID= $nid ";
+			$db_obj->executesql($sql);
+    }
+     static function updateu($ut,$nid){
+        $db_obj = new dbconnect;
+            $con = $db_obj->connect();
+            $con->set_charset("utf8");
+                
+			$sql="update usertype set Type= '".$ut."' WHERE ID= '".$nid."' ";
 			$db_obj->executesql($sql);
     }
     
@@ -80,6 +100,27 @@ class UserType
         return $result;
        
     }
+    public static function select(){
+        $db_obj = new dbconnect;
+		$con = $db_obj->connect();
+        $con->set_charset("utf8");
+        $sql = "SELECT DISTINCT s1.Type as ut, s1.ID as id FROM user u INNER JOIN usertype s1 ON s1.ID=u.UserType_id";
+         $TypeDataSet = $db_obj->executesql($sql);
+        $i=0;
+		$Result;
+		while ($row =  mysqli_fetch_array($TypeDataSet))
+		{
+			$MyObj= new UserType($row["id"]);
+            $MyObj->ID = $row["id"];
+            $MyObj->UserTypeName = $row["ut"];
+            $Result[$i]=$MyObj;
+			$i++;
+		}
+        
+		return $Result;
+       
+    }
+    
         
 }
 

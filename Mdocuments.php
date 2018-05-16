@@ -25,7 +25,7 @@ public function insert ()
     $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+        
     $sql="UPDATE `documents` SET `DocumentType_ID`='".$this->docType_ID."',`Value`='".$this->Value."',`a7raz`='".$this->a7raz."'WHERE  ID ='".$ID."'";
     
         $db_obj->executesql($sql);
@@ -36,7 +36,7 @@ public function insert ()
     $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
+       
     $sql="DELETE FROM `documents` WHERE ID ='".$ID."'";
    
         $db_obj->executesql($sql);
@@ -47,7 +47,6 @@ public function insert ()
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
        
         $sql="SELECT  `Value`, T9.Type As type, `a7raz` FROM `documents`d1
          INNER JOIN documenttype_id T9
@@ -79,6 +78,29 @@ static function ViewDT(){
 		}
 		return $Result;
 }
+    
+public function insertd()
+{
+   $db_obj = new dbconnect;
+		$con = $db_obj->connect();
+        $con->set_charset("utf8");
+    
+    $sq="INSERT INTO documenttype_id (Type) VALUES ('".$this->type."') ";
+    
+        $db_obj->executesql($sq);
+        $db_obj->disconnect();
+}
+ public function deleted($ID)
+{
+    $db_obj = new dbconnect;
+		$con = $db_obj->connect();
+        $con->set_charset("utf8");
+       
+    $sql="DELETE FROM documenttype_id WHERE ID ='".$ID."'";
+   
+        $db_obj->executesql($sql);
+        $db_obj->disconnect();
+}      
 public static function select($id,$val){
         $db_obj = new dbconnect;
 		$con = $db_obj->connect();

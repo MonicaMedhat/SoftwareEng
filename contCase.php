@@ -87,8 +87,21 @@ for($i=0;$i<count($obj);$i++){?>
 $("#details").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php echo $obj[$i]->Status; ?> </option>");
 </script>
 <?php
+}
+$obj=CaseStatus::View();
+for($i=0;$i<count($obj);$i++){?>
+<script>
+$("#previous").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php echo $obj[$i]->Status; ?> </option>");
+</script>
+<?php
+}
+$obj=CaseStatus::View();
+for($i=0;$i<count($obj);$i++){?>
+<script>
+$("#decision").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php echo $obj[$i]->Status; ?> </option>");
+</script>
+<?php
 }?>
-
 <?php
     $v ='2';	
     $obj=User::View($v);
@@ -150,15 +163,6 @@ $("#documenttype").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php ec
 </script>
 <?php
 }?>
-
- <?php
-$obj=PMethod::View();
-for($i=0;$i<count($obj);$i++){?>
-<script>
-$("#payment").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php echo $obj[$i]->Name; ?> </option>");
-</script>
-<?php
-}?>
  
 <?php
 if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -176,6 +180,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $Cmod->Place_Of_Case_ID = $_POST["sessionplace"];
             $Cmod->CourtName_ID = $_POST["court"];
             $Cmod->Status_ID =$_POST["details"];
+            $Cmod->previous_status =$_POST["previous"];
+            $Cmod->decision =$_POST["decision"];
+
             $Cmod->Dayra_ID = $_POST["circle"];   
     
             
@@ -223,7 +230,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
              }
     
             $Cdmod->doc_ID = $Dmod->ID;
-            $Cdmod->POV_ID = $_POST["payment"];
+           
     
             $Cdmod->insert($Cdmod);
             $cd = $Cdmod->doc_ID;
@@ -267,14 +274,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         document.getElementById('form1').style.display = "none";
         document.getElementById('form2').style.display = "none";
         document.getElementById('client').style.display = "none";
-        document.getElementById('form4').style.display = "none"; 
         document.getElementById('form3').style.display = "block"; 
         }
         function form3_hide() {
         document.getElementById('form').style.display = "none";
         document.getElementById('form1').style.display = "none";
         document.getElementById('form3').style.display = "none";
-        document.getElementById('form4').style.display = "none"; 
+       
         document.getElementById('form2').style.display = "block"; 
         }
         function client_show() {
@@ -283,7 +289,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         document.getElementById('form2').style.display = "none";
         document.getElementById('form3').style.display = "none"; 
         document.getElementById('client').style.display = "block"; 
-         document.getElementById('form4').style.display = "none"; 
+        
         }
         function form4_show() {
         document.getElementById('form').style.display = "none";
@@ -291,7 +297,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         document.getElementById('form3').style.display = "none";
         document.getElementById('form2').style.display = "none"; 
         document.getElementById('client').style.display = "none"; 
-        document.getElementById('form4').style.display = "block"; 
+        
         }
         function div_hide(){
         location.href = 'index.php';

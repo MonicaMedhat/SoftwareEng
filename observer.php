@@ -1,20 +1,16 @@
 <?php
 require_once("db.php");
-require_once("Mnotfications.php");
+require ("Mnotfications.php");
+include "MuserType.php";
+include "Muser.php";
+
+
  $db_obj = new dbconnect;
 		$con = $db_obj->connect();
         $con->set_charset("utf8");
-        header('Content-Type: text/html; charset=utf-8');
-
-
-
-
-
-
-    
-    
+            
 //AbstractObserver(client)
-abstract class User {
+abstract class us {
     public $userid;
 //    public $value;
     
@@ -22,8 +18,8 @@ abstract class User {
 }
 //AbstractSubject
 abstract class Message {
-    abstract function AddUser(User $u);//attach
-    abstract function removeUser(User $u);//detach
+    abstract function AddUser(us $u);//attach
+    abstract function removeUser(us $u);//detach
     abstract function notify();
 }
 
@@ -31,7 +27,7 @@ function writeln($line_in) {
     echo $line_in."<br/>";
 }
 
-class NormalUser extends User { //PatternObserver
+class NormalUser extends us { //PatternObserver
     public function __construct($userid) {
         $this->userid=$userid;
     }
@@ -40,7 +36,7 @@ class NormalUser extends User { //PatternObserver
          $n->insert();
     }
 }
-class PremiumUser extends User { //PatternObserver
+class PremiumUser extends us { //PatternObserver
     public function __construct($userid) {
         $this->userid=$userid;
     }
@@ -56,11 +52,11 @@ class clientGroup extends Message { //PatternSubject
     private $text = NULL;//$favoritePatterns
     private $users = array();//$observers
     
-    function AddUser(User $u) {
+    function AddUser(us $u) {
       //could also use array_push($this->observers, $u);
       $this->users[] = $u;
     }
-    function removeUser(User $u) {
+    function removeUser(us $u) {
       //$key = array_search($u, $this->observers);
       foreach($this->users as $okey => $oval) {
         if ($oval == $u) { 
@@ -82,19 +78,27 @@ class clientGroup extends Message { //PatternSubject
     }
 }
 
-  writeln('BEGIN TESTING OBSERVER PATTERN');
-  writeln('');
+$obj=UserType::select();
+for($i=0;$i<count($obj);$i++){?>
+<script>
+$("#view").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php echo $obj[$i]->UserTypeName; ?> </option>");
+</script>
+<?php
+}
+if(isset($_POST['v']))
+{
+$v = $_POST["view"];	
+$obj=User::View($v);
+for($i=0;$i<count($obj);$i++){?>
+<script>
+$("#un").append("<option value= <?php echo $obj[$i]->ID; ?> > <?php echo $obj[$i]->FullName; ?> </option>");
+</script>
+<?php } } 
 
-  $patternGossiper = new clientGroup();
-  $patternGossipFan = new NormalUser('2');
-$patternGossipFan2 = new PremiumUser('1');
-  $patternGossiper->AddUser($patternGossipFan);
-$patternGossiper->AddUser($patternGossipFan2);
-  $patternGossiper->sendMessage('welcome ');
-  $patternGossiper->sendMessage('welcome again');
-  $patternGossiper->removeUser($patternGossipFan);
-  $patternGossiper->sendMessage('talet message');
-
-  writeln('END TESTING OBSERVER PATTERN');
-
+$u = $_POST["un"];
+$c = new clientGroup();
+$user = new NormalUser($u);
+$c->AddUser($user);
+$m = $_POST["message"];
+$c->sendMessage($m); 
 ?>

@@ -10,7 +10,7 @@
        
        <div  id="popup" >
                   
-           <form  id="addcase"  name="form" action="contCase.php" method="POST" >
+           <form  id="addcase"  name="form" action="Vcases.php" method="POST" >
                
             <img id="close" src="close.png" width="40px" hight="40px" onclick ="div_hide()">
             
@@ -68,17 +68,35 @@
                
             <br>
             <br>
-            <br>
-            <b> التفاصيل </b>
+            
+            <b> ما تم في الجلسة </b>
             <br>
 
                <select name='details' id="details">
            
                </select>
                <br>
+                <br>
+                 <b> ما تم في الجلسة السابقة </b>
+            <br>
+
+               <select name='previous' id="previous">
+           
+               </select>
+               
+               <br>
+                <br>
+                 <b> القرار </b>
+                <br>
+
+               <select name='decision' id="decision">
+           
+               </select>
+               
+               <br>
                <br>
             <button class="m" type="button" onclick ="form1_show(); ">التالي</button>
-               <?php  include("contCase.php");?>
+              
            </div>
            
            
@@ -114,7 +132,7 @@
             <br>
             <button class="m" type="button" onclick ="form1_hide() ">رجوع</button>
             <button class="m" type="button" onclick ="form2_show() ">التالي</button>
-           <?php  include("contCase.php");?>
+           
            </div>
            <div id="form2" name="form2">
                
@@ -125,15 +143,12 @@
             </select>
             <br>
             <br>
-            <button class="m" type="button" onclick ="form4_show()"> اوراق الموكل </button>
-            <br>
-            <br>
             <button class="m" type="button" onclick ="client_show() ">اضافة موكل</button>
             <br>
             <br>
             <button class="m" type="button" onclick ="form2_hide() ">رجوع</button>
             <button class="m" type="button" onclick ="form3_show() ">التالي</button>
-                 <?php  include("contCase.php");?>
+                 
            </div>
            
            <div id="client" name='client' >
@@ -161,49 +176,36 @@
             <input type ="text" name = "mobileC">
             <br>
             <br>
-            <button class="m" type="button" onclick ="form4_show()"> اوراق الموكل </button>
-            <br>
-            <br>
             <button class="m" type="button" onclick ="form2_show() ">رجوع</button>
             <button class="m" type="button" onclick ="form3_show() ">التالي</button>
-               <?php  include("contCase.php");?>
-           </div>
                
-            <div id="form4" name="form4">
-            
+           </div> 
+           
+           <div id="form3" name="form3">
             <b> اوراق الموكل </b>
-                <textarea name='document' rows="4" cols="30"></textarea>
+               <br>
+            <textarea name='document' rows="4" cols="30"></textarea>
             <br>
             <br>
+               <b> نوع اوراق الموكل </b>
+               <br>
+                <br>
             <select name='documenttype' id="documenttype">
              </select>  
+            <br>
             <br>
             <b> احراز </b>
             <br>
             <input type ="text" name = "27raz">
                <br>
                 <br>
-            
-            <button class="m" type="button" onclick ="form3_show() ">التالي</button>
-                  <?php  include("contCase.php");?>
-            </div>
-    
-           
-           <div id="form3" name="form3">
               
-            <b> طريقة الدفع </b>
-            <br>
-            <select name='payment' id="payment">
-              
-            </select>   
-            <br>
-            <br>
             <button class="m" type="button" onclick ="form3_hide() ">رجوع</button>
             <button class="m" type="submit">حفظ</button>
-                <?php  include("contCase.php");?>
+                
             </div>
                
-       
+       <?php  include("contCase.php");?>
         </form>
         
        </div>
